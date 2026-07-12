@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JPBalanceados — Sistema de gestión para distribuidoras</title>
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:wght@600;700;800&family=Work+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --verde:#2D6A4F; --verde-oscuro:#1F4D38; --verde-pale:#E4F0EA;
+    --oro:#C89B3C; --oro-pale:#F5E9CE;
+    --carbon:#1A1D1B; --carbon-60:#4B5550; --hueso:#F6F5F1; --blanco:#FFFFFF;
+    --borde:#E1DFD8;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Work Sans',system-ui,sans-serif;background:var(--hueso);color:var(--carbon);line-height:1.5;}
+  h1,h2,h3,.display{font-family:'Big Shoulders',sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:0.3px;line-height:1.05;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{color:inherit;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
+  img{max-width:100%;display:block;}
+
+  /* ── Header ─────────────────────────────────────────────────────── */
+  header{position:sticky;top:0;z-index:50;background:rgba(246,245,241,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--borde);}
+  .header-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:1120px;margin:0 auto;}
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Big Shoulders',sans-serif;font-weight:800;font-size:22px;letter-spacing:0.4px;color:var(--verde-oscuro);}
+  .logo-mark{width:32px;height:32px;border-radius:7px;background:var(--verde);display:flex;align-items:center;justify-content:center;font-size:16px;}
+  .header-actions{display:flex;gap:10px;}
+  .btn{display:inline-flex;align-items:center;justify-content:center;height:42px;padding:0 22px;border-radius:999px;font-weight:600;font-size:14px;cursor:pointer;border:none;transition:transform 0.12s ease, background 0.15s;text-decoration:none;white-space:nowrap;}
+  .btn:active{transform:scale(0.97);}
+  .btn-primario{background:var(--verde);color:#fff;}
+  .btn-primario:hover{background:var(--verde-oscuro);}
+  .btn-fantasma{background:transparent;color:var(--verde-oscuro);border:1.5px solid var(--verde-oscuro);}
+  .btn-fantasma:hover{background:var(--verde-pale);}
+
+  /* ── Hero ───────────────────────────────────────────────────────── */
+  .hero{padding:76px 0 64px;}
+  .hero-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:56px;align-items:center;}
+  .eyebrow{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:var(--verde-oscuro);background:var(--verde-pale);padding:6px 12px;border-radius:6px;margin-bottom:22px;}
+  .hero h1{font-size:clamp(38px,5.4vw,60px);color:var(--carbon);margin-bottom:20px;}
+  .hero h1 .acento{color:var(--verde);}
+  .hero p.sub{font-size:17px;color:var(--carbon-60);max-width:480px;margin-bottom:32px;}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;}
+
+  /* ── Signature: medidor de espalda de stock ───────────────────────── */
+  .medidor-card{background:var(--carbon);border-radius:18px;padding:28px 26px;color:#fff;box-shadow:0 24px 60px rgba(26,29,27,0.28);}
+  .medidor-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px;}
+  .medidor-top .producto{font-size:13px;color:#B9C4BE;}
+  .medidor-top .nombre{font-family:'Big Shoulders',sans-serif;font-weight:700;font-size:20px;text-transform:uppercase;}
+  .chip-accion{background:var(--oro);color:#2A1F04;font-size:11px;font-weight:700;padding:5px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:0.4px;}
+  .barra-stock{height:14px;background:rgba(255,255,255,0.12);border-radius:8px;overflow:hidden;margin-bottom:10px;}
+  .barra-stock-fill{height:100%;background:linear-gradient(90deg,var(--verde-oscuro),var(--verde));border-radius:8px;width:78%;animation:consumir 6s ease-in-out infinite alternate;}
+  @keyframes consumir{from{width:78%;}to{width:34%;}}
+  .medidor-stats{display:flex;justify-content:space-between;font-size:12px;color:#B9C4BE;margin-bottom:20px;}
+  .medidor-stats strong{font-family:'JetBrains Mono',monospace;color:#fff;font-size:16px;display:block;}
+  .medidor-aviso{background:rgba(200,155,60,0.14);border:1px solid rgba(200,155,60,0.4);border-radius:10px;padding:12px 14px;font-size:13px;color:var(--oro-pale);}
+  @media (prefers-reduced-motion: reduce){ .barra-stock-fill{animation:none;} }
+
+  /* ── Secciones generales ──────────────────────────────────────────── */
+  section{padding:72px 0;}
+  .section-head{max-width:640px;margin-bottom:44px;}
+  .section-head .eyebrow{margin-bottom:14px;}
+  .section-head h2{font-size:clamp(28px,3.6vw,40px);color:var(--carbon);}
+  .section-head p{color:var(--carbon-60);font-size:16px;margin-top:12px;}
+
+  /* ── Features ─────────────────────────────────────────────────────── */
+  .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .feature-card{background:#fff;border:1px solid var(--borde);border-radius:14px;padding:26px 24px;}
+  .feature-card .icono{width:42px;height:42px;border-radius:10px;background:var(--verde-pale);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:16px;}
+  .feature-card h3{font-family:'Work Sans',sans-serif;text-transform:none;font-weight:700;font-size:17px;letter-spacing:0;margin-bottom:8px;}
+  .feature-card p{font-size:14px;color:var(--carbon-60);}
+
+  /* ── Screenshots placeholder ──────────────────────────────────────── */
+  .screens-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .screen-placeholder{aspect-ratio:16/10;background:linear-gradient(135deg,var(--verde-pale),var(--hueso));border:1px solid var(--borde);border-radius:12px;object-fit:cover;object-position:top;width:100%;}
+
+  /* ── Público objetivo ─────────────────────────────────────────────── */
+  .publico{background:var(--verde-oscuro);color:#fff;border-radius:20px;padding:48px 40px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
+  .publico h2{color:#fff;font-size:clamp(26px,3.2vw,34px);margin-bottom:16px;}
+  .publico p{color:#CFE0D6;font-size:15px;}
+  .publico-lista{list-style:none;display:flex;flex-direction:column;gap:14px;}
+  .publico-lista li{display:flex;gap:12px;align-items:flex-start;font-size:15px;}
+  .publico-lista .marca{color:var(--oro);font-weight:700;font-family:'JetBrains Mono',monospace;}
+
+  /* ── Precios ──────────────────────────────────────────────────────── */
+  .planes{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  .plan{background:#fff;border:1px solid var(--borde);border-radius:16px;padding:30px 28px;position:relative;}
+  .plan.destacado{border-color:var(--verde);box-shadow:0 16px 40px rgba(45,106,79,0.14);}
+  .plan.destacado::before{content:'Más elegido';position:absolute;top:-12px;right:24px;background:var(--verde);color:#fff;font-size:11px;font-weight:700;padding:5px 12px;border-radius:999px;text-transform:uppercase;}
+  .plan h3{font-family:'Big Shoulders',sans-serif;font-size:20px;margin-bottom:6px;}
+  .plan .precio{font-family:'JetBrains Mono',monospace;font-size:34px;font-weight:600;margin:14px 0 4px;color:var(--verde-oscuro);}
+  .plan .precio span{font-size:14px;color:var(--carbon-60);font-family:'Work Sans',sans-serif;}
+  .plan ul{list-style:none;margin:20px 0 26px;display:flex;flex-direction:column;gap:10px;}
+  .plan li{font-size:14px;color:var(--carbon-60);display:flex;gap:8px;}
+  .plan li::before{content:'✓';color:var(--verde);font-weight:700;}
+  .precio-nota{font-size:12px;color:var(--carbon-60);text-align:center;margin-top:18px;}
+
+  /* ── Contacto ─────────────────────────────────────────────────────── */
+  .contacto{background:var(--carbon);border-radius:20px;padding:56px 40px;text-align:center;color:#fff;}
+  .contacto h2{color:#fff;font-size:clamp(26px,3.4vw,36px);margin-bottom:14px;}
+  .contacto p{color:#B9C4BE;font-size:15px;max-width:460px;margin:0 auto 30px;}
+  .contacto-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+
+  footer{padding:32px 0;text-align:center;color:var(--carbon-60);font-size:13px;border-top:1px solid var(--borde);}
+
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;}
+    .features-grid, .screens-grid{grid-template-columns:1fr;}
+    .publico{grid-template-columns:1fr;padding:32px 24px;}
+    .planes{grid-template-columns:1fr;}
+  }
+
+  /* ── Vista de la app (login/sistema) — ocupa toda la pantalla ────── */
+  #vista-app{display:none;position:fixed;inset:0;background:var(--hueso);z-index:1000;}
+  #vista-app iframe{width:100%;height:100%;border:none;display:block;}
+  #btn-volver-landing{position:fixed;top:12px;left:12px;z-index:1001;background:rgba(26,29,27,0.75);color:#fff;border:none;border-radius:20px;padding:7px 16px;font-family:'Work Sans',sans-serif;font-size:12px;cursor:pointer;backdrop-filter:blur(4px);}
+  #btn-cambiar-empresa{position:fixed;top:12px;right:12px;z-index:1001;background:rgba(26,29,27,0.75);color:#fff;border:none;border-radius:20px;padding:7px 16px;font-family:'Work Sans',sans-serif;font-size:11px;cursor:pointer;display:none;align-items:center;gap:6px;backdrop-filter:blur(4px);}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════ VISTA LANDING ═══════════════════════ -->
+<div id="vista-landing">
+
+<header>
+  <div class="header-inner">
+    <div class="logo"><span class="logo-mark">🐾</span>JPBalanceados</div>
+    <div class="header-actions">
+      <a href="#sistema" class="btn btn-fantasma">Conocé el sistema</a>
+      <button class="btn btn-primario" onclick="entrarComoCliente()">Ingresar</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">ERP para distribuidoras de balanceados</span>
+      <h1>Llevá tu negocio <span class="acento">antes</span> de que el stock te lleve a vos.</h1>
+      <p class="sub">Ventas, pedidos, reparto, cuentas corrientes y facturación electrónica con ARCA — todo en un solo sistema pensado para cómo se maneja realmente una distribuidora, no para cómo se maneja una oficina.</p>
+      <div class="hero-ctas">
+        <button class="btn btn-primario" onclick="entrarComoCliente()">Ya soy cliente — Ingresar</button>
+        <a href="#sistema" class="btn btn-fantasma">Quiero conocer el sistema</a>
+      </div>
+    </div>
+
+    <div class="medidor-card">
+      <div class="medidor-top">
+        <div><div class="producto">BALANCEADO PERRO ADULTO 25KG</div><div class="nombre">Espalda de stock</div></div>
+        <span class="chip-accion">Acción sugerida</span>
+      </div>
+      <div class="barra-stock"><div class="barra-stock-fill"></div></div>
+      <div class="medidor-stats">
+        <div>Bultos restantes<strong>18</strong></div>
+        <div>Días de cobertura<strong class="mono">6</strong></div>
+        <div>Próxima compra<strong>Jue 16</strong></div>
+      </div>
+      <div class="medidor-aviso">⚠ El costo del próximo lote sube 8%. Ajustá el precio de venta antes de que se agote el stock actual.</div>
+    </div>
+  </div>
+</section>
+
+<section id="sistema">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Qué resuelve</span>
+      <h2>Un sistema armado para el día a día de una distribuidora</h2>
+      <p>No es una planilla con nombre elegante — es el flujo completo, desde que entra el pedido hasta que sale la factura.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="icono">🧾</div>
+        <h3>Facturación electrónica con ARCA</h3>
+        <p>Factura C y Nota de Crédito C con CAE generado automáticamente. Sin planillas paralelas, sin cargar todo dos veces.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icono">📦</div>
+        <h3>Stock por depósito, en tiempo real</h3>
+        <p>Bolsas cerradas y granel, separados. Cada venta, compra o apertura de bolsa actualiza el stock al instante.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icono">📈</div>
+        <h3>Precios con timing, no a ciegas</h3>
+        <p>El sistema te avisa cuándo conviene ajustar precios según el costo del próximo lote — antes de que te agarre desprevenido.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icono">🚚</div>
+        <h3>Pedidos, preparación y reparto</h3>
+        <p>Desde el carrito de venta hasta la hoja de ruta de entregas — con retiro en local o envío, sin duplicar la carga.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icono">💳</div>
+        <h3>Cuentas corrientes de clientes</h3>
+        <p>Saldos, pagos y deuda por cliente, siempre a la vista antes de despachar un pedido nuevo.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icono">📊</div>
+        <h3>Dashboard con lo que importa</h3>
+        <p>Ventas, stock valorizado y alertas de reposición en una sola pantalla — sin exportar nada a Excel.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Así se ve</span>
+      <h2>El sistema en uso</h2>
+    </div>
+    <div class="screens-grid">
+      <img class="screen-placeholder" src="img/captura-venta-rapida.png" alt="Pantalla de venta rápida del sistema">
+      <img class="screen-placeholder" src="img/captura-precios.png" alt="Panel de precios con espalda de stock">
+      <img class="screen-placeholder" src="img/captura-dashboard.png" alt="Dashboard con reportes y KPIs">
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="publico">
+      <div>
+        <h2>Pensado para tu tipo de negocio</h2>
+        <p>Si vendés por bulto y por kilo al mismo tiempo, este sistema ya conoce ese problema.</p>
+      </div>
+      <ul class="publico-lista">
+        <li><span class="marca">01</span> Distribuidoras de balanceados y alimento para mascotas</li>
+        <li><span class="marca">02</span> Veterinarias y petshops con reparto propio</li>
+        <li><span class="marca">03</span> Corralones y forrajerías con venta a granel</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="precios">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Planes</span>
+      <h2>Un plan claro, sin sorpresas en la letra chica</h2>
+    </div>
+    <div class="planes">
+      <div class="plan">
+        <h3>Esencial</h3>
+        <div class="precio">$45.000<span>/mes</span></div>
+        <ul>
+          <li>Venta rápida y pedidos</li>
+          <li>Stock por depósito</li>
+          <li>Cuentas corrientes de clientes</li>
+          <li>Hasta 3 usuarios</li>
+        </ul>
+        <button class="btn btn-fantasma" style="width:100%" onclick="irAContacto()">Consultar</button>
+      </div>
+      <div class="plan destacado">
+        <h3>Full</h3>
+        <div class="precio">$75.000<span>/mes</span></div>
+        <ul>
+          <li>Todo lo del plan Esencial</li>
+          <li>Facturación electrónica ARCA incluida</li>
+          <li>Precios con timing de costos</li>
+          <li>Dashboard y reportes avanzados</li>
+          <li>Usuarios ilimitados</li>
+        </ul>
+        <button class="btn btn-primario" style="width:100%" onclick="irAContacto()">Consultar</button>
+      </div>
+    </div>
+    <p class="precio-nota">Precios de referencia — el plan final se ajusta según módulos y volumen de tu operación.</p>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="wrap">
+    <div class="contacto">
+      <h2>¿Arrancamos?</h2>
+      <p>Contanos cómo trabajás hoy y te mostramos el sistema andando con datos reales de tu rubro.</p>
+      <div class="contacto-ctas">
+        <a class="btn btn-primario" href="https://wa.me/5490000000000" target="_blank" rel="noopener">Hablar por WhatsApp</a>
+        <a class="btn btn-fantasma" style="border-color:#fff;color:#fff" href="mailto:[email protected]">Escribir un email</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">JPBalanceados — Sistema de gestión para distribuidoras · sistema.jpbalanceados.com</div>
+</footer>
+
+</div>
+
+<!-- ═══════════════════════ VISTA APP (login / sistema) ═══════════════════════ -->
+<div id="vista-app">
+  <button id="btn-volver-landing" onclick="volverALanding()">← Página principal</button>
+  <button id="btn-cambiar-empresa" onclick="cambiarEmpresa()"><span id="txt-empresa-actual"></span> · Cambiar de empresa</button>
+  <iframe id="iframe-principal" src="" title="JPBalanceados"></iframe>
+</div>
+
+<script>
+  // URL del LOGIN DE EMPRESA del proyecto central — reemplazar por el
+  // /exec real de tu proyecto MANAGER.
+  var URL_LOGIN_EMPRESA = 'https://script.google.com/macros/s/TU_URL_DEL_PROYECTO_CENTRAL/exec';
+  var CLAVE_LOCALSTORAGE = 'jpb_empresa_recordada';
+
+  function entrarComoCliente() {
+    document.getElementById('vista-landing').style.display = 'none';
+    document.getElementById('vista-app').style.display = 'block';
+
+    var guardado = leerEmpresaRecordada();
+    if (guardado && guardado.url && guardado.fecha === fechaDeHoy()) {
+      document.getElementById('iframe-principal').src = guardado.url;
+      mostrarBotonCambiar(guardado.nombre);
+    } else {
+      try { localStorage.removeItem(CLAVE_LOCALSTORAGE); } catch (e) {}
+      document.getElementById('iframe-principal').src = URL_LOGIN_EMPRESA;
+    }
+  }
+
+  function volverALanding() {
+    document.getElementById('vista-app').style.display = 'none';
+    document.getElementById('vista-landing').style.display = 'block';
+    document.getElementById('iframe-principal').src = ''; // libera el iframe
+  }
+
+  function irAContacto() {
+    document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function fechaDeHoy() {
+    var d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+
+  function leerEmpresaRecordada() {
+    try {
+      var raw = localStorage.getItem(CLAVE_LOCALSTORAGE);
+      return raw ? JSON.parse(raw) : null;
+    } catch (e) { return null; }
+  }
+
+  function guardarEmpresaRecordada(url, nombre) {
+    try {
+      localStorage.setItem(CLAVE_LOCALSTORAGE, JSON.stringify({ url: url, nombre: nombre || '', fecha: fechaDeHoy() }));
+    } catch (e) {}
+  }
+
+  function mostrarBotonCambiar(nombre) {
+    var btn = document.getElementById('btn-cambiar-empresa');
+    document.getElementById('txt-empresa-actual').textContent = nombre || 'Conectado';
+    btn.style.display = 'flex';
+  }
+
+  function cambiarEmpresa() {
+    try { localStorage.removeItem(CLAVE_LOCALSTORAGE); } catch (e) {}
+    document.getElementById('btn-cambiar-empresa').style.display = 'none';
+    document.getElementById('iframe-principal').src = URL_LOGIN_EMPRESA;
+  }
+
+  window.addEventListener('message', function(event) {
+    var origenValido =
+      event.origin === 'https://script.google.com' ||
+      /\.googleusercontent\.com$/.test(new URL(event.origin).hostname);
+
+    if (!origenValido) return;
+    if (!event.data || event.data.tipo !== 'ENTRAR_A_EMPRESA') return;
+
+    var url = String(event.data.url || '');
+    if (url.indexOf('https://script.google.com/macros/s/') !== 0) return;
+
+    var nombre = String(event.data.nombre || '');
+    document.getElementById('iframe-principal').src = url;
+    guardarEmpresaRecordada(url, nombre);
+    mostrarBotonCambiar(nombre);
+  });
+</script>
+</body>
+</html>
