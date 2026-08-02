@@ -49,7 +49,8 @@
   .eyebrow::before{content:'';width:14px;height:2px;background:var(--dorado);display:inline-block;}
   .hero h1{font-size:clamp(32px,5.2vw,56px);color:var(--negro);margin:0 auto 20px;max-width:760px;font-weight:700;letter-spacing:-0.025em;}
   .hero h1 .acento{color:var(--verde);}
-  .hero p.sub{font-size:18px;color:var(--gris-oscuro);max-width:520px;margin:0 auto 32px;}
+  .hero p.sub{font-size:18px;color:var(--gris-oscuro);max-width:520px;margin:0 auto 20px;}
+  .hero-capacidades{font-size:13px;color:var(--gris-oscuro);max-width:640px;margin:0 auto 36px;letter-spacing:0.1px;}
   .hero-ctas{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:56px;}
   .hero-ctas .btn{height:46px;padding:0 24px;font-size:15px;}
 
@@ -113,6 +114,22 @@
   .rubro-item{display:flex;gap:14px;align-items:flex-start;}
   .rubro-item .icono-linea{color:var(--dorado);flex:none;margin-top:2px;}
   .rubro-item .texto{font-size:14.5px;color:#E7F0EA;line-height:1.5;}
+
+  /* ── Niveles: la narrativa problema → solución por escalón ────────── */
+  .niveles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .nivel-card{border:1px solid var(--gris-medio);border-radius:10px;padding:28px 26px;display:flex;flex-direction:column;}
+  .nivel-card h3{font-size:19px;margin-bottom:8px;}
+  .nivel-card .para-quien{font-size:12.5px;color:var(--gris-oscuro);margin-bottom:16px;}
+  .nivel-card .que-resuelve{font-size:14.5px;color:var(--negro);margin-bottom:18px;font-weight:500;line-height:1.5;}
+  .nivel-card ul{list-style:none;display:flex;flex-direction:column;gap:9px;margin-top:auto;}
+  .nivel-card li{font-size:13px;color:var(--gris-oscuro);display:flex;gap:8px;}
+  .nivel-card li::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--verde);flex:none;margin-top:6px;}
+
+  .modulos-teaser{margin-top:28px;border:1px solid var(--gris-medio);border-radius:10px;padding:20px 26px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;background:var(--gris-fondo);}
+  .modulos-teaser p{font-size:13.5px;color:var(--gris-oscuro);}
+  .modulos-teaser strong{color:var(--negro);}
+  .modulos-teaser a{font-size:13.5px;font-weight:600;color:var(--verde-oscuro);text-decoration:none;white-space:nowrap;}
+  .modulos-teaser a:hover{text-decoration:underline;}
 
   /* ── Features: dos formatos alternados (rompe la repetición) ──────── */
   .features-destacadas{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px;}
@@ -200,6 +217,7 @@
   @media (max-width:860px){
     .hero{padding:56px 0 0;}
     .features-destacadas{grid-template-columns:1fr;}
+    .niveles-grid{grid-template-columns:1fr;}
     .features-grid{grid-template-columns:1fr 1fr;}
     .feature-card{border-left:none;border-top:1px solid var(--gris-medio);}
     .feature-card:first-child, .feature-card:nth-child(2){border-top:none;}
@@ -280,8 +298,9 @@
 <section class="hero">
   <div class="wrap">
     <span class="eyebrow">Sistema de gestión multirubro</span>
-    <h1>Facturá, controlá stock y cobrá cuentas corrientes desde <span class="acento">un solo sistema</span></h1>
-    <p class="sub">Pensado para negocios que venden por unidad y a granel: pet shops, dietéticas, forrajerías, corralones y almacenes. Facturación con ARCA incluida.</p>
+    <h1>Un solo sistema para vender, controlar stock y hacer crecer tu negocio</h1>
+    <p class="sub">Pedidos con trazabilidad, reparto con mapa, cuentas corrientes, facturación con ARCA y catálogo online — todo en un solo lugar, para negocios que venden por unidad y a granel.</p>
+    <p class="hero-capacidades">Stock en tiempo real · Pedidos y trazabilidad · Reparto con mapa y app para el chofer · Cuentas corrientes · Facturación ARCA · Catálogo online</p>
     <div class="hero-ctas">
       <button class="btn btn-primario" onclick="irAContacto()">Solicitar una demostración</button>
       <a href="#asi-se-ve" class="btn btn-fantasma">Ver el producto</a>
@@ -375,30 +394,44 @@
 <section id="catalogo" style="background:var(--gris-fondo)">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">Catálogo y sitio web</span>
-      <h2>Tu catálogo online, siempre actualizado</h2>
-      <p>Además del sistema de gestión, cada cliente tiene su propio catálogo web público — sin manejar dos sistemas ni cargar nada dos veces.</p>
+      <span class="eyebrow">Catálogo y ventas online</span>
+      <h2>Se terminó mandar la lista de precios en PDF</h2>
+      <p>Cada actualización que hacés en el sistema —un precio, una foto, un producto nuevo— impacta directo en el catálogo que compartís con tus clientes, sean mayoristas o minoristas.</p>
     </div>
+
+    <div class="features-destacadas">
+      <div class="feature-grande">
+        <div class="icono"><svg class="icono-linea" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div>
+        <h3>Catálogo web (CMS) <span class="mono" style="font-size:13px;color:var(--verde-oscuro);font-weight:600;">+$8.000/mes</span></h3>
+        <p>Publicás tu catálogo público desde el mismo sistema que ya usás para vender — sin programar nada y sin pagar un desarrollador aparte. Tu logo, tus productos y tus categorías, listos para compartir por WhatsApp, redes o QR.</p>
+      </div>
+      <div class="feature-grande">
+        <div class="icono"><svg class="icono-linea" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 9h20"/><path d="M6 14h4M6 17h7"/></svg></div>
+        <h3>Portal de ventas online <span class="mono" style="font-size:13px;color:var(--verde-oscuro);font-weight:600;">+$10.000/mes</span></h3>
+        <p>El catálogo se convierte en una tienda completa: el stock del portal se sincroniza en tiempo real con el depósito y el mostrador, y controlás publicaciones, precios e imágenes desde un solo lugar. Requiere Nivel 2 (con pedidos) o superior.</p>
+      </div>
+    </div>
+
     <div class="confianza-grid">
       <div class="confianza-item">
-        <svg class="icono-linea" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>
-        <h3>Se actualiza solo</h3>
-        <p>Cargás un precio o una foto en el sistema, publicás con un clic y el catálogo público queda al día. Nada de mantener una web aparte.</p>
-      </div>
-      <div class="confianza-item">
-        <svg class="icono-linea" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><circle cx="7" cy="6.5" r=".6" fill="currentColor" stroke="none"/></svg>
-        <h3>Página web propia</h3>
-        <p>Tu comercio tiene una página pública con tu logo, tus productos y tus categorías — lista para compartir por WhatsApp, redes o QR.</p>
+        <svg class="icono-linea" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+        <h3>Nunca desactualizado</h3>
+        <p>Cargás en el sistema, publicás, y listo — nada de mantener una web aparte.</p>
       </div>
       <div class="confianza-item">
         <svg class="icono-linea" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>
-        <h3>Con tu propio dominio</h3>
-        <p>Podés publicarlo en tu propia marca (por ejemplo catalogo.tunegocio.com) en lugar de una dirección genérica.</p>
+        <h3>Tu propia marca</h3>
+        <p>Dominio propio (por ejemplo catalogo.tunegocio.com) en vez de una dirección genérica.</p>
       </div>
       <div class="confianza-item">
         <svg class="icono-linea" viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 01-12.5 7.5L3 20l1.1-5.3A8.5 8.5 0 1121 11.5z"/></svg>
-        <h3>El cliente te consulta por WhatsApp</h3>
-        <p>Arma su pedido navegando el catálogo y te lo manda directo por WhatsApp — sin carritos de compra ni pagos online que administrar.</p>
+        <h3>Sin carritos que administrar</h3>
+        <p>El cliente arma su pedido navegando el catálogo y te lo manda directo por WhatsApp.</p>
+      </div>
+      <div class="confianza-item">
+        <svg class="icono-linea" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H7a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        <h3>Mayorista y minorista</h3>
+        <p>Un mismo catálogo, con distintas listas de precios según a quién se lo compartís.</p>
       </div>
     </div>
   </div>
@@ -444,45 +477,51 @@
 <section id="sistema">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">Qué resuelve</span>
-      <h2>Un sistema armado para el día a día de tu negocio</h2>
-      <p>El flujo completo, desde que entra el pedido hasta que sale la factura.</p>
+      <span class="eyebrow">Cómo funciona</span>
+      <h2>Un sistema que crece con tu negocio</h2>
+      <p>No pagás por lo que no usás. Elegís el nivel según cómo opera tu comercio hoy, y sumás módulos a medida que lo necesitás.</p>
     </div>
 
-    <div class="features-destacadas">
-      <div class="feature-grande">
-        <div class="icono"><svg class="icono-linea" viewBox="0 0 24 24"><path d="M7 3h10v18l-2.5-1.5L12 21l-2.5-1.5L7 21z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></div>
-        <h3>Facturación electrónica con ARCA</h3>
-        <p>Factura C y Nota de Crédito C con CAE generado automáticamente, desde la misma venta. Sin planillas paralelas, sin cargar todo dos veces.</p>
+    <div class="niveles-grid">
+      <div class="nivel-card">
+        <div class="plan-nivel">Nivel 1</div>
+        <h3>Venta simple</h3>
+        <p class="para-quien">Para kioscos, almacenes y comercios que venden en el momento, sin pedidos ni reparto.</p>
+        <p class="que-resuelve">Vendés rápido y no perdés el control del stock — sin planillas, sin cálculos a mano.</p>
+        <ul>
+          <li>Venta por unidad, kilo o bulto en una sola pantalla</li>
+          <li>Control de stock de un depósito, en tiempo real</li>
+          <li>Reportes básicos de venta del día</li>
+        </ul>
       </div>
-      <div class="feature-grande">
-        <div class="icono"><svg class="icono-linea" viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M5 7l-3 6a3.2 3.2 0 006 0z"/><path d="M19 7l-3 6a3.2 3.2 0 006 0z"/><path d="M5 7h14M9 3h6"/></svg></div>
-        <h3>Unidad y a granel, en el mismo mostrador</h3>
-        <p>Vendé por bulto, por kilo o por unidad — el sistema calcula y descuenta el stock del depósito correcto en cada venta.</p>
+      <div class="nivel-card">
+        <div class="plan-nivel">Nivel 2 — incluye todo lo anterior</div>
+        <h3>Con pedidos</h3>
+        <p class="para-quien">Para comercios que además reciben pedidos para preparar, y necesitan llevar cuenta a sus clientes.</p>
+        <p class="que-resuelve">Cada pedido queda con trazabilidad: sabés qué se pidió, qué se preparó, y cuánto te debe cada cliente.</p>
+        <ul>
+          <li>Toma y preparación de pedidos, con trazabilidad</li>
+          <li>Stock multi-depósito (cerrado y fraccionado)</li>
+          <li>Cuentas corrientes: saldo y deuda por cliente</li>
+        </ul>
+      </div>
+      <div class="nivel-card">
+        <div class="plan-nivel">Nivel 3 — incluye todo lo anterior</div>
+        <h3>Con reparto</h3>
+        <p class="para-quien">Para distribuidoras y comercios con reparto propio.</p>
+        <p class="que-resuelve">El chofer aprieta "Iniciar ruta" y el sistema le va marcando la próxima parada: adónde ir, qué entregar, si hay que cobrar o ya está pago, y qué artículos bajar en cada parada para que no se crucen entre pedidos.</p>
+        <ul>
+          <li>Armado automático de hoja de ruta</li>
+          <li>Visualización de entregas en el mapa</li>
+          <li>App para el chofer: parada, cobro o pago ya realizado, artículos a bajar</li>
+          <li>Llamar al cliente o rechazar la parada, sin salir de la ruta</li>
+        </ul>
       </div>
     </div>
 
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="icono"><svg class="icono-linea" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg></div>
-        <h3>Stock por depósito</h3>
-        <p>Cerrado y fraccionado, separados y en tiempo real.</p>
-      </div>
-      <div class="feature-card">
-        <div class="icono"><svg class="icono-linea" viewBox="0 0 24 24"><rect x="2" y="9" width="14" height="8" rx="1.5"/><path d="M16 12h3l3 3v2h-6z"/><circle cx="6.5" cy="19" r="1.6"/><circle cx="17.5" cy="19" r="1.6"/></svg></div>
-        <h3>Pedidos y reparto</h3>
-        <p>Del carrito de venta a la hoja de ruta, sin duplicar carga.</p>
-      </div>
-      <div class="feature-card">
-        <div class="icono"><svg class="icono-linea" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M2 10h20"/><path d="M6 14.5h4"/></svg></div>
-        <h3>Cuentas corrientes</h3>
-        <p>Saldos y deuda por cliente, siempre a la vista.</p>
-      </div>
-      <div class="feature-card">
-        <div class="icono"><svg class="icono-linea" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v2.2M12 18.8V21M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M3 12h2.2M18.8 12H21M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/></svg></div>
-        <h3>Configurado a medida</h3>
-        <p>Unidades, categorías y flujos según cómo trabajás vos.</p>
-      </div>
+    <div class="modulos-teaser">
+      <p>Sumá cuando quieras, a cualquier nivel: <strong>Facturación electrónica con ARCA</strong> (con control de operaciones pendientes por facturar), <strong>Catálogo web</strong> y <strong>Portal de ventas online</strong>.</p>
+      <a href="#precios">Ver módulos y precios →</a>
     </div>
   </div>
 </section>
@@ -491,8 +530,8 @@
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow">Por qué confiar</span>
-      <h2>Un sistema que ya funciona todos los días</h2>
-      <p>No es un producto de laboratorio — es la misma herramienta con la que se gestiona una distribuidora real.</p>
+      <h2>Puesto a prueba en la operación de todos los días</h2>
+      <p>Es la misma herramienta con la que se gestiona una distribuidora real — no una demo armada para la ocasión.</p>
     </div>
     <div class="confianza-grid">
       <div class="confianza-item">
@@ -557,7 +596,7 @@
         <ul>
           <li>Armado de hoja de ruta</li>
           <li>Visualización de entregas en el mapa</li>
-          <li>Orden de reparto optimizado</li>
+          <li>App de reparto para el chofer (parada, cobro, artículos a bajar)</li>
         </ul>
         <button class="btn btn-fantasma" style="width:100%" onclick="irAContacto()">Consultar</button>
       </div>
