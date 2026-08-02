@@ -27,8 +27,8 @@
   /* ── Header ─────────────────────────────────────────────────────── */
   header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.9);backdrop-filter:saturate(1.1);border-bottom:1px solid var(--gris-medio);}
   .header-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;max-width:1180px;margin:0 auto;gap:32px;}
-  .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;letter-spacing:-0.01em;color:var(--negro);flex:none;}
-  .logo-mark{width:28px;height:28px;border-radius:6px;overflow:hidden;flex:none;}
+  .logo{display:flex;align-items:center;gap:12px;font-weight:700;font-size:19px;letter-spacing:-0.01em;color:var(--negro);flex:none;}
+  .logo-mark{width:44px;height:44px;border-radius:8px;overflow:hidden;flex:none;}
   .logo-mark img{width:100%;height:100%;object-fit:cover;}
   .nav-central{display:flex;align-items:center;gap:30px;font-size:14px;font-weight:500;color:var(--gris-oscuro);}
   .nav-central a{white-space:nowrap;text-decoration:none;}
@@ -135,17 +135,30 @@
   .confianza-item p{font-size:13px;color:var(--gris-oscuro);}
 
   /* ── Precios ──────────────────────────────────────────────────────── */
-  .planes{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:820px;margin:0 auto;}
-  .plan{border:1px solid var(--gris-medio);border-radius:10px;padding:34px 30px;position:relative;}
+  .planes{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:980px;margin:0 auto;}
+  .plan{border:1px solid var(--gris-medio);border-radius:10px;padding:30px 26px;position:relative;}
   .plan.destacado{border:1.5px solid var(--negro);}
-  .plan.destacado .etiqueta-plan{position:absolute;top:-11px;left:30px;background:var(--negro);color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:0.3px;}
-  .plan h3{font-size:16.5px;margin-bottom:6px;font-weight:700;}
-  .plan .precio{font-family:var(--fuente-mono);font-size:28px;font-weight:700;margin:16px 0 4px;color:var(--negro);}
-  .plan .precio span{font-size:13.5px;color:var(--gris-oscuro);font-family:var(--fuente);font-weight:400;}
-  .plan ul{list-style:none;margin:20px 0 24px;display:flex;flex-direction:column;gap:11px;}
-  .plan li{font-size:13.5px;color:var(--gris-oscuro);display:flex;gap:10px;}
+  .plan.destacado .etiqueta-plan{position:absolute;top:-11px;left:26px;background:var(--negro);color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:0.3px;}
+  .plan-nivel{font-size:12px;font-weight:600;color:var(--verde-oscuro);margin-bottom:8px;}
+  .plan h3{font-size:16px;margin-bottom:4px;font-weight:700;}
+  .plan .precio{font-family:var(--fuente-mono);font-size:26px;font-weight:700;margin:14px 0 4px;color:var(--negro);}
+  .plan .precio span{font-size:13px;color:var(--gris-oscuro);font-family:var(--fuente);font-weight:400;}
+  .plan ul{list-style:none;margin:18px 0 22px;display:flex;flex-direction:column;gap:10px;}
+  .plan li{font-size:13.5px;color:var(--gris-oscuro);display:flex;gap:9px;}
   .plan li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--verde);flex:none;margin-top:7px;}
-  .precio-nota{font-size:12.5px;color:var(--gris-oscuro);text-align:center;margin-top:26px;}
+  .precio-nota{font-size:12.5px;color:var(--gris-oscuro);text-align:center;margin-top:20px;max-width:640px;margin-left:auto;margin-right:auto;}
+
+  .modulos-titulo{font-size:14px;font-weight:700;color:var(--negro);text-align:center;margin:48px 0 20px;}
+  .modulos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:980px;margin:0 auto;}
+  .modulo-item{border:1px solid var(--gris-medio);border-radius:10px;padding:18px 20px;display:flex;flex-direction:column;gap:6px;}
+  .modulo-item .fila-modulo{display:flex;justify-content:space-between;align-items:baseline;gap:10px;}
+  .modulo-item .nombre-modulo{font-size:14px;font-weight:600;color:var(--negro);}
+  .modulo-item .precio-modulo{font-family:var(--fuente-mono);font-weight:700;font-size:14.5px;color:var(--verde-oscuro);white-space:nowrap;}
+  .modulo-item .nota-modulo{font-size:12px;color:var(--gris-oscuro);}
+
+  .incluido-todos{max-width:760px;margin:44px auto 0;border-top:1px solid var(--gris-medio);padding-top:28px;text-align:center;}
+  .incluido-todos p{font-size:13.5px;color:var(--gris-oscuro);line-height:1.7;}
+  .incluido-todos strong{color:var(--negro);}
 
   /* ── FAQ ────────────────────────────────────────────────────────── */
   .faq{max-width:720px;margin:0 auto;}
@@ -191,7 +204,7 @@
     .feature-card{border-left:none;border-top:1px solid var(--gris-medio);}
     .feature-card:first-child, .feature-card:nth-child(2){border-top:none;}
     .confianza-grid{grid-template-columns:1fr 1fr;}
-    .rubros-grid, .planes{grid-template-columns:1fr;}
+    .rubros-grid, .planes, .modulos-grid{grid-template-columns:1fr;}
     .nav-central{display:none;}
     .footer-grid{grid-template-columns:1fr 1fr;}
     .rubros-banda{padding:44px 26px;}
@@ -252,6 +265,7 @@
     </div>
     <nav class="nav-central">
       <a href="#asi-se-ve">Producto</a>
+      <a href="#catalogo">Catálogo online</a>
       <a href="#rubros">Rubros</a>
       <a href="#precios">Planes</a>
       <a href="#faq">Preguntas frecuentes</a>
@@ -346,6 +360,45 @@
         </button>
         <p class="screen-leyenda">Cuentas corrientes</p>
         <p class="screen-desc">Saldo y deuda por cliente, antes de despachar un pedido nuevo.</p>
+      </div>
+      <div class="captura-item">
+        <button type="button" class="screen-btn" onclick="abrirLightbox('img/captura-catalogo-admin.png','Panel de administración del catálogo online')">
+          <img class="screen-placeholder" src="img/captura-catalogo-admin.png" alt="Panel de administración del catálogo online">
+        </button>
+        <p class="screen-leyenda">Catálogo online</p>
+        <p class="screen-desc">Publicás tu catálogo público desde el mismo sistema.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="catalogo" style="background:var(--gris-fondo)">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Catálogo y sitio web</span>
+      <h2>Tu catálogo online, siempre actualizado</h2>
+      <p>Además del sistema de gestión, cada cliente tiene su propio catálogo web público — sin manejar dos sistemas ni cargar nada dos veces.</p>
+    </div>
+    <div class="confianza-grid">
+      <div class="confianza-item">
+        <svg class="icono-linea" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>
+        <h3>Se actualiza solo</h3>
+        <p>Cargás un precio o una foto en el sistema, publicás con un clic y el catálogo público queda al día. Nada de mantener una web aparte.</p>
+      </div>
+      <div class="confianza-item">
+        <svg class="icono-linea" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><circle cx="7" cy="6.5" r=".6" fill="currentColor" stroke="none"/></svg>
+        <h3>Página web propia</h3>
+        <p>Tu comercio tiene una página pública con tu logo, tus productos y tus categorías — lista para compartir por WhatsApp, redes o QR.</p>
+      </div>
+      <div class="confianza-item">
+        <svg class="icono-linea" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>
+        <h3>Con tu propio dominio</h3>
+        <p>Podés publicarlo en tu propia marca (por ejemplo catalogo.tunegocio.com) en lugar de una dirección genérica.</p>
+      </div>
+      <div class="confianza-item">
+        <svg class="icono-linea" viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 01-12.5 7.5L3 20l1.1-5.3A8.5 8.5 0 1121 11.5z"/></svg>
+        <h3>El cliente te consulta por WhatsApp</h3>
+        <p>Arma su pedido navegando el catálogo y te lo manda directo por WhatsApp — sin carritos de compra ni pagos online que administrar.</p>
       </div>
     </div>
   </div>
@@ -471,34 +524,73 @@
     <div class="section-head">
       <span class="eyebrow">Planes</span>
       <h2>Un plan claro, sin sorpresas en la letra chica</h2>
+      <p>Elegís el nivel según cómo opera tu negocio, y sumás los módulos que necesites.</p>
     </div>
     <div class="planes">
       <div class="plan">
-        <h3>Esencial</h3>
-        <div class="precio">$45.000<span>/mes</span></div>
+        <div class="plan-nivel">Nivel 1</div>
+        <h3>Venta simple</h3>
+        <div class="precio">$15.000<span>/mes</span></div>
         <ul>
-          <li>Venta rápida por unidad y a granel</li>
-          <li>Stock por depósito</li>
-          <li>Cuentas corrientes de clientes</li>
-          <li>Hasta 3 usuarios</li>
+          <li>Venta rápida por unidad, kilo o bulto</li>
+          <li>Control de stock de un depósito</li>
+          <li>Reportes básicos</li>
         </ul>
         <button class="btn btn-fantasma" style="width:100%" onclick="irAContacto()">Consultar</button>
       </div>
       <div class="plan destacado">
         <span class="etiqueta-plan">Más elegido</span>
-        <h3>Full</h3>
-        <div class="precio">$75.000<span>/mes</span></div>
+        <div class="plan-nivel">Nivel 2 — incluye todo lo anterior</div>
+        <h3>Con pedidos</h3>
+        <div class="precio">$20.000<span>/mes</span></div>
         <ul>
-          <li>Todo lo del plan Esencial</li>
-          <li>Facturación electrónica ARCA incluida</li>
-          <li>Configuración a medida de tu rubro</li>
-          <li>Dashboard y reportes avanzados</li>
-          <li>Usuarios ilimitados</li>
+          <li>Pedidos y preparación, con trazabilidad</li>
+          <li>Stock multi-depósito (cerrado y fraccionado)</li>
+          <li>Cuentas corrientes de clientes</li>
         </ul>
         <button class="btn btn-primario" style="width:100%" onclick="irAContacto()">Consultar</button>
       </div>
+      <div class="plan">
+        <div class="plan-nivel">Nivel 3 — incluye todo lo anterior</div>
+        <h3>Con reparto</h3>
+        <div class="precio">$30.000<span>/mes</span></div>
+        <ul>
+          <li>Armado de hoja de ruta</li>
+          <li>Visualización de entregas en el mapa</li>
+          <li>Orden de reparto optimizado</li>
+        </ul>
+        <button class="btn btn-fantasma" style="width:100%" onclick="irAContacto()">Consultar</button>
+      </div>
     </div>
-    <p class="precio-nota">Precios de referencia — el plan final se ajusta según tu rubro y el volumen de tu operación.</p>
+
+    <p class="modulos-titulo">Módulos que podés sumar a cualquier plan</p>
+    <div class="modulos-grid">
+      <div class="modulo-item">
+        <div class="fila-modulo">
+          <span class="nombre-modulo">Facturación electrónica ARCA</span>
+          <span class="precio-modulo">+$8.000/mes</span>
+        </div>
+        <span class="nota-modulo">Factura C y Nota de Crédito C con CAE, desde la misma venta.</span>
+      </div>
+      <div class="modulo-item">
+        <div class="fila-modulo">
+          <span class="nombre-modulo">Catálogo web (CMS)</span>
+          <span class="precio-modulo">+$8.000/mes</span>
+        </div>
+        <span class="nota-modulo">Catálogo público que se actualiza solo desde el sistema.</span>
+      </div>
+      <div class="modulo-item">
+        <div class="fila-modulo">
+          <span class="nombre-modulo">Portal de ventas online</span>
+          <span class="precio-modulo">+$10.000/mes</span>
+        </div>
+        <span class="nota-modulo">Requiere Nivel 2 o superior. Stock sincronizado en tiempo real con el depósito y el mostrador.</span>
+      </div>
+    </div>
+
+    <div class="incluido-todos">
+      <p><strong>Todos los planes incluyen:</strong> asesoramiento, implementación, integración y capacitación de tu equipo en una semana, y soporte diario. Si más adelante necesitás una modificación puntual, se cotiza según el alcance — la idea es que el sistema se adapte a tu negocio a medida que crece, con asesoría permanente sin cargo.</p>
+    </div>
   </div>
 </section>
 
@@ -558,6 +650,7 @@
         <h4>Producto</h4>
         <ul>
           <li><a href="#asi-se-ve">Capturas</a></li>
+          <li><a href="#catalogo">Catálogo online</a></li>
           <li><a href="#sistema">Qué resuelve</a></li>
           <li><a href="#precios">Planes</a></li>
           <li><a href="#" onclick="entrarComoCliente();return false;">Ingresar al sistema</a></li>
