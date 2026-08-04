@@ -49,6 +49,9 @@
   .eyebrow::before{content:'';width:14px;height:2px;background:var(--dorado);display:inline-block;}
   .hero h1{font-size:clamp(32px,5.2vw,56px);color:var(--negro);margin:0 auto 20px;max-width:760px;font-weight:700;letter-spacing:-0.025em;}
   .hero h1 .acento{color:var(--verde);}
+  .hero-cursor{display:inline-block;color:var(--verde);font-weight:400;animation:parpadeoCursor 0.9s step-end infinite;}
+  @keyframes parpadeoCursor{ 0%,49%{opacity:1;} 50%,100%{opacity:0;} }
+  @media (prefers-reduced-motion: reduce){ .hero-cursor{animation:none;} }
   .hero p.sub{font-size:18px;color:var(--gris-oscuro);max-width:520px;margin:0 auto 20px;}
   .hero-capacidades{font-size:13px;color:var(--gris-oscuro);max-width:640px;margin:0 auto 36px;letter-spacing:0.1px;}
   .hero-ctas{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:56px;}
@@ -285,9 +288,8 @@
 <section class="hero">
   <div class="wrap">
     <span class="eyebrow">Sistema de gestión multirubro</span>
-    <h1>Un solo sistema para vender, controlar stock y hacer crecer tu negocio</h1>
+    <h1>Un solo sistema para vender, controlar stock <span id="heroTipeo"></span><span class="hero-cursor">|</span></h1>
     <p class="sub">Pedidos con trazabilidad, reparto con mapa, cuentas corrientes, facturación con ARCA y catálogo online — todo en un solo lugar, para negocios que venden por unidad y a granel.</p>
-    <p class="hero-capacidades">Stock en tiempo real · Pedidos y trazabilidad · Reparto con mapa y app para el chofer · Cuentas corrientes · Facturación ARCA · Catálogo online</p>
     <div class="hero-ctas">
       <button class="btn btn-primario" onclick="irAContacto()">Solicitar una demostración</button>
       <a href="#asi-se-ve" class="btn btn-fantasma">Ver el producto</a>
@@ -299,9 +301,7 @@
           <div class="ventana-puntos"><span></span><span></span><span></span></div>
           <div class="ventana-url">app.jpsistema.com/venta-rapida</div>
         </div>
-        <video class="demo-video" autoplay muted loop playsinline preload="auto">
-          <source src="img/demo-sistema.mp4" type="video/mp4">
-        </video>
+        <img class="demo-video" src="img/hero-venta-rapida.png" alt="Pantalla real de Venta rápida en JPSistema, con el listado de productos y el carrito de venta">
       </div>
       <div class="base-dispositivo"></div>
     </div>
@@ -718,6 +718,44 @@
 </div>
 
 <script>
+  // ═══ Animación del cierre del título: tipea "...", los borra, y
+  //     recién ahí tipea "y hacer crecer tu negocio" ═══
+  function iniciarTipeoHero() {
+    var el = document.getElementById('heroTipeo');
+    if (!el) return;
+    var textoFinal = 'y hacer crecer tu negocio';
+
+    var prefiereMenosMovimiento = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefiereMenosMovimiento) { el.textContent = textoFinal; return; }
+
+    var n = 0;
+
+    function tipearPuntos() {
+      n++;
+      el.textContent = '.'.repeat(n);
+      if (n < 3) setTimeout(tipearPuntos, 250);
+      else setTimeout(borrarPuntos, 500);
+    }
+
+    function borrarPuntos() {
+      n--;
+      el.textContent = '.'.repeat(Math.max(n, 0));
+      if (n > 0) setTimeout(borrarPuntos, 220);
+      else setTimeout(escribirTexto, 250);
+    }
+
+    var i = 0;
+    function escribirTexto() {
+      el.textContent = textoFinal.slice(0, i);
+      i++;
+      if (i <= textoFinal.length) setTimeout(escribirTexto, 45);
+      else setTimeout(function() { el.textContent = textoFinal + '.'; }, 2000);
+    }
+
+    setTimeout(tipearPuntos, 600);
+  }
+  iniciarTipeoHero();
+
   // ═══ Lightbox: click en una captura la agranda ═══
   var _ultimoFocoAntesDeLightbox = null;
 
