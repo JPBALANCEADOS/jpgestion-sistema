@@ -63,25 +63,12 @@
   .ventana-puntos span{width:9px;height:9px;border-radius:50%;background:var(--gris-medio);display:block;}
   .ventana-url{font-family:var(--fuente-mono);font-size:12px;color:var(--gris-oscuro);background:var(--blanco);border:1px solid var(--gris-medio);border-radius:5px;padding:4px 12px;flex:1;text-align:center;max-width:260px;margin:0 auto;}
 
+  .demo-video{width:100%;display:block;background:var(--gris-fondo);}
   .rubro-card{background:var(--blanco);}
-  .rubro-card-top{display:flex;justify-content:space-between;align-items:center;padding:16px 28px;border-bottom:1px solid var(--gris-medio);}
-  .rubro-card-top .rotulo{font-size:13.5px;font-weight:600;color:var(--gris-oscuro);text-align:left;}
-  .rubro-tabs{display:flex;border-bottom:1px solid var(--gris-medio);padding:0 28px;gap:6px;overflow-x:auto;}
-  .rubro-tab{background:transparent;border:none;border-bottom:2px solid transparent;color:var(--gris-oscuro);padding:13px 10px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--fuente);transition:color .12s;white-space:nowrap;}
-  .rubro-tab:hover{color:var(--negro);}
-  .rubro-tab.activo{color:var(--verde-oscuro);border-bottom-color:var(--verde);}
-  .rubro-ficha{opacity:1;transition:opacity .15s ease;padding:30px 28px 26px;text-align:left;display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center;}
-  .rubro-ficha.cambiando{opacity:0;}
-  .rubro-ficha .etiqueta-producto{font-size:11.5px;color:var(--gris-oscuro);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:8px;font-weight:600;}
-  .rubro-ficha .nombre-producto{font-weight:700;font-size:26px;margin-bottom:6px;color:var(--negro);letter-spacing:-0.02em;}
-  .rubro-datos{}
-  .rubro-fila{display:flex;justify-content:space-between;align-items:baseline;font-size:13.5px;color:var(--gris-oscuro);padding:12px 0;border-top:1px solid var(--gris-fondo);}
-  .rubro-fila strong{font-family:var(--fuente-mono);color:var(--negro);font-size:16px;font-weight:600;}
-  .barra-nivel{height:5px;background:var(--gris-fondo);border-radius:3px;overflow:hidden;margin:14px 0 2px;}
-  .barra-nivel-fill{height:100%;background:var(--verde);border-radius:3px;}
-  .rubro-nota{font-size:12.5px;color:var(--gris-oscuro);padding:0 28px 22px;text-align:left;}
-  @media (prefers-reduced-motion: reduce){ .rubro-ficha{transition:none;} }
-  @media (max-width:640px){ .rubro-ficha{grid-template-columns:1fr;gap:18px;} }
+
+  /* ── Recreación fiel del shell real de la app: sidebar + módulo +
+       carrito, con los colores/tipografía tomados directo del ERP real
+       (Segoe UI, verde #2D6A4F, semáforo de stock, panel de carrito) ─── */
 
   /* ── Secciones ──────────────────────────────────────────────────── */
   section{padding:96px 0;}
@@ -310,26 +297,11 @@
       <div class="pantalla-dispositivo">
         <div class="ventana-barra">
           <div class="ventana-puntos"><span></span><span></span><span></span></div>
-          <div class="ventana-url">app.jpsistema.com</div>
+          <div class="ventana-url">app.jpsistema.com/venta-rapida</div>
         </div>
-        <div class="rubro-card">
-          <div class="rubro-card-top">
-            <span class="rotulo">Vista de mostrador — elegí tu rubro</span>
-          </div>
-          <div class="rubro-tabs" id="rubro-tabs" role="tablist" aria-label="Elegí un rubro"></div>
-          <div class="rubro-ficha" id="rubro-ficha">
-            <div>
-              <div class="etiqueta-producto" id="rf-etiqueta">Producto</div>
-              <div class="nombre-producto" id="rf-nombre">—</div>
-            </div>
-            <div class="rubro-datos">
-              <div class="rubro-fila"><span>Precio</span><strong id="rf-precio">—</strong></div>
-              <div class="rubro-fila"><span>Stock disponible</span><strong id="rf-stock">—</strong></div>
-              <div class="barra-nivel"><div class="barra-nivel-fill" id="rf-barra" style="width:0%"></div></div>
-            </div>
-          </div>
-          <p class="rubro-nota">Mismo sistema, mismo mostrador — solo cambia el vocabulario de tu rubro.</p>
-        </div>
+        <video class="demo-video" autoplay muted loop playsinline preload="auto">
+          <source src="img/demo-sistema.mp4" type="video/mp4">
+        </video>
       </div>
       <div class="base-dispositivo"></div>
     </div>
@@ -746,57 +718,6 @@
 </div>
 
 <script>
-  // ═══ Ficha de producto que se adapta al rubro (elemento de firma) ═══
-  var RUBROS = [
-    { clave:'petshop', etiqueta:'Pet shop', producto:'Balanceado gato adulto', precio:'$28.500 /bulto', stock:'24 bultos', nivel:62 },
-    { clave:'dietetica', etiqueta:'Dietética', producto:'Avena arrollada', precio:'$3.200 /kg', stock:'40 kg', nivel:78 },
-    { clave:'forrajeria', etiqueta:'Forrajería', producto:'Maíz partido', precio:'$9.800 /bolsón', stock:'60 bolsones', nivel:45 },
-    { clave:'almacen', etiqueta:'Almacén', producto:'Yerba mate', precio:'$4.500 /kg', stock:'85 kg', nivel:88 },
-  ];
-  var _rubroActivo = 0;
-  var _autoplayRubro = null;
-
-  function renderTabsRubro() {
-    var cont = document.getElementById('rubro-tabs');
-    cont.innerHTML = RUBROS.map(function(r, i) {
-      return '<button type="button" class="rubro-tab' + (i === _rubroActivo ? ' activo' : '') + '" role="tab" aria-selected="' + (i === _rubroActivo) + '" onclick="elegirRubro(' + i + ', true)">' + r.etiqueta + '</button>';
-    }).join('');
-  }
-
-  function pintarFichaRubro() {
-    var r = RUBROS[_rubroActivo];
-    document.getElementById('rf-etiqueta').textContent = r.etiqueta;
-    document.getElementById('rf-nombre').textContent = r.producto;
-    document.getElementById('rf-precio').textContent = r.precio;
-    document.getElementById('rf-stock').textContent = r.stock;
-    document.getElementById('rf-barra').style.width = r.nivel + '%';
-  }
-
-  function elegirRubro(indice, esManual) {
-    if (indice === _rubroActivo) return;
-    _rubroActivo = indice;
-    var ficha = document.getElementById('rubro-ficha');
-    ficha.classList.add('cambiando');
-    setTimeout(function() {
-      pintarFichaRubro();
-      ficha.classList.remove('cambiando');
-    }, 140);
-    renderTabsRubro();
-    if (esManual && _autoplayRubro) { clearInterval(_autoplayRubro); _autoplayRubro = null; }
-  }
-
-  function iniciarRubroCard() {
-    renderTabsRubro();
-    pintarFichaRubro();
-    var prefiereMenosMovimiento = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!prefiereMenosMovimiento) {
-      _autoplayRubro = setInterval(function() {
-        elegirRubro((_rubroActivo + 1) % RUBROS.length, false);
-      }, 4200);
-    }
-  }
-  iniciarRubroCard();
-
   // ═══ Lightbox: click en una captura la agranda ═══
   var _ultimoFocoAntesDeLightbox = null;
 
