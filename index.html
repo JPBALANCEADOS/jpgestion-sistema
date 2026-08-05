@@ -62,10 +62,13 @@
   .dispositivo-3d{transform:rotateX(6deg) rotateY(-8deg) rotateZ(0.4deg);transform-origin:50% 50%;transition:transform .7s ease;}
   .pantalla-dispositivo{border-radius:12px 12px 3px 3px;border:1px solid var(--gris-medio);box-shadow:0 60px 120px -50px rgba(23,23,21,0.35), 0 15px 40px -20px rgba(23,23,21,0.18);overflow:hidden;background:#fff;}
   .base-dispositivo{height:14px;background:var(--gris-fondo);border:1px solid var(--gris-medio);border-top:none;border-radius:0 0 8px 8px;margin:0 34px;position:relative;}
-  .ventana-barra{display:flex;align-items:center;gap:14px;padding:11px 16px;border-bottom:1px solid var(--gris-medio);background:#FCFCFB;}
-  .ventana-puntos{display:flex;gap:6px;flex:none;}
-  .ventana-puntos span{width:9px;height:9px;border-radius:50%;background:var(--gris-medio);display:block;}
-  .ventana-url{font-family:var(--fuente-mono);font-size:12px;color:var(--gris-oscuro);background:var(--blanco);border:1px solid var(--gris-medio);border-radius:5px;padding:4px 12px;flex:1;text-align:center;max-width:260px;margin:0 auto;}
+  .ventana-barra{display:flex;align-items:center;gap:14px;padding:11px 16px;background:#17171A;}
+  .ventana-puntos{display:flex;gap:7px;flex:none;}
+  .ventana-puntos span{width:11px;height:11px;border-radius:50%;display:block;box-shadow:inset 0 0 0 1px rgba(0,0,0,0.15);}
+  .ventana-puntos span:nth-child(1){background:#FF5F57;}
+  .ventana-puntos span:nth-child(2){background:#FEBC2E;}
+  .ventana-puntos span:nth-child(3){background:#28C840;}
+  .ventana-url{font-family:var(--fuente-mono);font-size:12px;color:#D4D4D2;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1);border-radius:5px;padding:4px 12px;flex:1;text-align:center;max-width:260px;margin:0 auto;}
 
   .demo-video{width:100%;display:block;background:var(--gris-fondo);}
   .rubro-card{background:var(--blanco);}
@@ -1035,7 +1038,20 @@
     var stageInner = document.getElementById('stageInner');
     var urlBarra = document.getElementById('urlBarra');
     var cursor = document.getElementById('cursorTour');
+    var frame = document.getElementById('dispositivo3d');
     if (!stage || !cursor) return;
+
+    var BASE = { x: 6, y: -8, z: 0.4 };
+    var RANGE_X = 7;   // grados que se inclina el dispositivo según la altura del puntero
+    var RANGE_Y = 11;  // grados según la posición horizontal del puntero
+    if (frame) frame.style.transition = 'transform .9s cubic-bezier(.3,0,.2,1)';
+
+    function tiltHaciaPuntero(cx, cy){
+      if (!frame) return;
+      var rx = BASE.x + (0.5 - cy / 100) * RANGE_X;
+      var ry = BASE.y + (cx / 100 - 0.5) * RANGE_Y;
+      frame.style.transform = 'rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg) rotateZ(' + BASE.z + 'deg)';
+    }
 
     var urls = {
       venta: 'app.jpsistema.com/venta-rapida',
@@ -1085,6 +1101,7 @@
 
       cursor.style.left = actual.cx + '%';
       cursor.style.top = actual.cy + '%';
+      tiltHaciaPuntero(actual.cx, actual.cy);
       if (actual.clic){
         cursor.classList.remove('clic');
         void cursor.offsetWidth;
@@ -1109,65 +1126,6 @@
     avanzar();
   })();
 
-  // ═══ Tilt 3D con mouse (profundo) + movimiento automático cuando no hay mouse ═══
-  (function(){
-    var tiltWrap = document.querySelector('.dispositivo');
-    var frame = document.getElementById('dispositivo3d');
-    if (!tiltWrap || !frame) return;
-
-    var BASE = { x: 6, y: -8, z: 0.4 };
-    var MAX_TILT = 14;
-    var isHovering = false;
-    var idleRAF = null;
-    var idleStart = null;
-
-    function applyTilt(rx, ry, rz){
-      frame.style.transform = 'rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg) rotateZ(' + rz.toFixed(2) + 'deg)';
-    }
-
-    function stopIdle(){
-      if (idleRAF) cancelAnimationFrame(idleRAF);
-      idleRAF = null;
-      idleStart = null;
-    }
-
-    function startIdle(){
-      if (idleRAF) return;
-      frame.style.transition = 'none';
-      idleStart = performance.now();
-      function loop(t){
-        if (isHovering) { idleRAF = null; return; }
-        var elapsed = (t - idleStart) / 1000;
-        var rx = BASE.x + Math.sin(elapsed * 0.45) * 3;
-        var ry = BASE.y + Math.cos(elapsed * 0.32) * 5.5;
-        var rz = BASE.z + Math.sin(elapsed * 0.2) * 0.5;
-        applyTilt(rx, ry, rz);
-        idleRAF = requestAnimationFrame(loop);
-      }
-      idleRAF = requestAnimationFrame(loop);
-    }
-
-    tiltWrap.addEventListener('mousemove', function(e){
-      isHovering = true;
-      stopIdle();
-      frame.style.transition = 'transform .12s ease-out';
-      var rect = tiltWrap.getBoundingClientRect();
-      var px = (e.clientX - rect.left) / rect.width;
-      var py = (e.clientY - rect.top) / rect.height;
-      var rx = BASE.x + (0.5 - py) * MAX_TILT * 2;
-      var ry = BASE.y + (px - 0.5) * MAX_TILT * 2;
-      applyTilt(rx, ry, BASE.z);
-    });
-
-    tiltWrap.addEventListener('mouseleave', function(){
-      isHovering = false;
-      frame.style.transition = 'transform .7s ease';
-      applyTilt(BASE.x, BASE.y, BASE.z);
-      startIdle();
-    });
-
-    startIdle();
-  })();
 </script>
 </body>
 </html>
