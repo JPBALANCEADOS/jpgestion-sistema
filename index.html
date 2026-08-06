@@ -58,7 +58,7 @@
   .hero-ctas .btn{height:46px;padding:0 24px;font-size:15px;}
 
   /* ── Dispositivo: la captura como protagonista ────────────────────── */
-  .dispositivo{max-width:1040px;margin:0 auto;padding:0 20px;perspective:2200px;}
+  .dispositivo{width:100%;margin:0 auto;perspective:2200px;}
   .dispositivo-3d{transform:rotateX(6deg) rotateY(-8deg) rotateZ(0.4deg);transform-origin:50% 50%;transition:transform .7s ease;}
   .pantalla-dispositivo{border-radius:12px 12px 3px 3px;border:1px solid var(--gris-medio);box-shadow:0 60px 120px -50px rgba(23,23,21,0.35), 0 15px 40px -20px rgba(23,23,21,0.18);overflow:hidden;background:#fff;}
   .base-dispositivo{height:14px;background:var(--gris-fondo);border:1px solid var(--gris-medio);border-top:none;border-radius:0 0 8px 8px;margin:0 34px;position:relative;}
@@ -161,10 +161,13 @@
   .section-head p{color:var(--gris-oscuro);font-size:16px;margin-top:14px;}
 
   /* ── Capturas: carrusel de módulos ─────────────────────────────────── */
-  .carrusel-capturas{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x proximity;padding:4px 4px 14px;margin:0 -4px;-webkit-overflow-scrolling:touch;}
+  .carrusel-capturas{overflow:hidden;padding:4px 4px 14px;margin:0 -4px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent);mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent);}
+  .carrusel-track{display:flex;gap:20px;width:max-content;animation:marqueeLeft 38s linear infinite;}
+  .carrusel-capturas:hover .carrusel-track{animation-play-state:paused;}
   .carrusel-capturas::-webkit-scrollbar{height:5px;}
   .carrusel-capturas::-webkit-scrollbar-thumb{background:var(--gris-medio);border-radius:3px;}
-  .captura-item{flex:0 0 auto;width:min(360px,78vw);scroll-snap-align:start;}
+  .captura-item{flex:0 0 auto;width:min(360px,78vw);}
+  @keyframes marqueeLeft{from{transform:translateX(0);}to{transform:translateX(-50%);}}
   .screen-btn{all:unset;cursor:zoom-in;display:block;position:relative;border-radius:8px;overflow:hidden;border:1px solid var(--gris-medio);box-shadow:0 18px 44px -22px rgba(23,23,21,0.22);}
   .screen-btn:focus-visible{outline:2px solid var(--verde);outline-offset:2px;}
   .screen-placeholder{aspect-ratio:16/10.5;background:var(--gris-fondo);object-fit:cover;object-position:top;width:100%;display:block;}
@@ -435,8 +438,8 @@
       <h2>Cada módulo, pensado para el mostrador</h2>
       <p>Capturas reales del sistema. Deslizá para ver más módulos, o hacé click para ampliar.</p>
     </div>
-    <p class="carrusel-hint">← Deslizá para ver más →</p>
     <div class="carrusel-capturas">
+     <div class="carrusel-track" id="carruselTrack">
       <div class="captura-item">
         <button type="button" class="screen-btn" onclick="abrirLightbox('img/captura-venta-rapida.png','Pantalla de venta rápida del sistema')">
           <img class="screen-placeholder" src="img/captura-venta-rapida.png" alt="Pantalla de venta rápida del sistema">
@@ -479,6 +482,7 @@
         <p class="screen-leyenda">Catálogo online</p>
         <p class="screen-desc">Publicás tu catálogo público desde el mismo sistema.</p>
       </div>
+     </div>
     </div>
   </div>
 </section>
@@ -842,8 +846,26 @@
   //     recién ahí tipea "y hacer crecer tu negocio" ═══
   function iniciarTipeoHero() {
     var el = document.getElementById('heroTipeo');
+    var h1 = el ? el.closest('h1') : null;
     if (!el) return;
     var textoFinal = 'y hacer crecer tu negocio';
+
+    // Reserva de antemano la altura final del título (con el texto completo)
+    // para que ir tipeando no empuje el contenido de abajo hacia más abajo.
+    function reservarAltura() {
+      if (!h1) return;
+      var previo = el.textContent;
+      h1.style.minHeight = '';
+      el.textContent = textoFinal + '.';
+      h1.style.minHeight = h1.offsetHeight + 'px';
+      el.textContent = previo;
+    }
+    reservarAltura();
+    var reAlturaTimeout;
+    window.addEventListener('resize', function(){
+      clearTimeout(reAlturaTimeout);
+      reAlturaTimeout = setTimeout(reservarAltura, 150);
+    });
 
     var prefiereMenosMovimiento = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefiereMenosMovimiento) { el.textContent = textoFinal; return; }
@@ -1029,6 +1051,19 @@
     guardarEmpresaRecordada(url, nombre);
     mostrarBotonCambiar(nombre);
   });
+
+  // ═══ Carrusel infinito de capturas: duplica el set para loop sin cortes ═══
+  (function(){
+    var track = document.getElementById('carruselTrack');
+    if (!track) return;
+    var clones = Array.prototype.slice.call(track.children).map(function(el){
+      var clon = el.cloneNode(true);
+      clon.setAttribute('aria-hidden', 'true');
+      clon.querySelectorAll('button').forEach(function(b){ b.setAttribute('tabindex', '-1'); });
+      return clon;
+    });
+    clones.forEach(function(c){ track.appendChild(c); });
+  })();
 </script>
 
 <script>
